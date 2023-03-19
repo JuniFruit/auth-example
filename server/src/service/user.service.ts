@@ -79,9 +79,8 @@ export class UserService {
       throw ApiException.UnauthorizedError();
     }
 
-    const verified = TokenService.verifyRefresh(refreshToken);
+    const verified = await TokenService.verifyRefresh(refreshToken);
     const isInDB = await TokenService.findRefresh(refreshToken);
-
     if (!verified || !isInDB) {
       throw ApiException.UnauthorizedError();
     }

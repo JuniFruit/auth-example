@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "helpers/mixins" as mixins;
+@use "~vuetify/src/styles/styles.sass" as vuetify;
+@use "helpers/variables" as var;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.v-application {
+  @include mixins.blue-gradient(30);
+}

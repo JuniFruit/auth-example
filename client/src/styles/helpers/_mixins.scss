@@ -1,0 +1,5 @@
+@use "variables" as v;
+
+@mixin blue-gradient($degree: 30) {
+  background: linear-gradient(#{$degree}deg, v.$blue-main 5%, white) !important;
+}

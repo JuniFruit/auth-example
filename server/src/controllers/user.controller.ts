@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { UserService } from "../service/user.service";
 import { validationResult } from "express-validator/src/validation-result";
 import { ApiException } from "../exception/api.exception";
+import { MailService } from "../service/mail.service";
 
 const USER_COOKIE_AGE = 30 * 24 * 60 * 60 * 1000;
 
@@ -9,9 +10,8 @@ export class UserController {
   static logout: RequestHandler = async (req, res, next) => {
     try {
       const { refreshToken } = req.cookies;
-      const result = await UserService.logout(refreshToken);
+      await UserService.logout(refreshToken);
       res.clearCookie("refreshToken");
-      console.log(result);
       res.status(201).send();
     } catch (error) {
       next(error);
@@ -21,6 +21,10 @@ export class UserController {
     try {
       const { refreshToken } = req.cookies;
       const payload = await UserService.refresh(refreshToken);
+      res.cookie("refreshToken", payload!.refreshToken, {
+        maxAge: USER_COOKIE_AGE,
+        httpOnly: true,
+      });
       res.json(payload);
     } catch (error) {
       next(error);
@@ -74,6 +78,18 @@ export class UserController {
   static getAllUsers: RequestHandler = async (req, res, next) => {
     try {
       res.json({ message: "Hello" });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  static resendMail: RequestHandler = async (req, res, next) => {
+    try {
+      await MailService.sendActivationLink(
+        (req as any).user?.email,
+        (req as any).user.activationLink
+      );
+      res.status(200).send();
     } catch (error) {
       next(error);
     }

@@ -1,0 +1,6 @@
+@use "../../styles/helpers/mixins" as mixins;
+@use "../../styles/helpers/variables" as v;
+.drawer_container {
+  @include mixins.blue-gradient();
+  color: v.$blue-main;
+}

@@ -19,7 +19,7 @@ class MailServiceClass {
         user_id: process.env.EMAIL_KEY!,
         template_params: {
           service_name: "Juni Fruit",
-          activation_link: link,
+          activation_link: `${process.env.APP_URL}/api/activation/${link}`,
           to_email: email,
         },
       }),

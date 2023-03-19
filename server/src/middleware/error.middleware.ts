@@ -2,7 +2,7 @@ import { ErrorRequestHandler } from "express";
 import { ApiException } from "../exception/api.exception";
 
 export const handleException: ErrorRequestHandler = (err, req, res, next) => {
-  console.log(err);
+  // console.log(err);
   if (err instanceof ApiException) {
     return res
       .status(err.status)

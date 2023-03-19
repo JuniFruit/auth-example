@@ -15,9 +15,8 @@ router.post(
 );
 router.get("/refresh", UserController.refresh);
 
-router.use(authMiddleware);
-
-router.get("/users", UserController.getAllUsers);
-router.post("/logout", UserController.logout);
+router.get("/users", authMiddleware, UserController.getAllUsers);
+router.post("/logout", authMiddleware, UserController.logout);
+router.post("/resend_mail", authMiddleware, UserController.resendMail);
 
 export default router;

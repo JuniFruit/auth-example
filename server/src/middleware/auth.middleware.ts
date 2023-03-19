@@ -5,7 +5,6 @@ import { TokenService } from "../service/token.service";
 export const authMiddleware: RequestHandler = async (req, res, next) => {
   try {
     const header = req.headers.authorization;
-
     if (!header) return next(ApiException.UnauthorizedError());
 
     const token = header.split(" ")[1];

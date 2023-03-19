@@ -1,6 +1,9 @@
 import jwt from "jsonwebtoken";
 import { IUserDto } from "../dtos/user.dto";
+import * as dotenv from "dotenv";
 import tokenModel from "../models/token.model";
+
+dotenv.config();
 
 export class TokenService {
   static async generateToken(payload: IUserDto) {
@@ -44,9 +47,9 @@ export class TokenService {
       return null;
     }
   }
-  static verifyAccess(refreshToken: string) {
+  static verifyAccess(accessToken: string) {
     try {
-      const verified = jwt.verify(refreshToken, process.env.JWT_ACCESS_SECRET!);
+      const verified = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET!);
       return verified;
     } catch (error) {
       return null;

@@ -11,8 +11,27 @@ export default Vue.extend({
   data: () => ({
     //
   }),
+  mounted() {
+    localStorage.getItem('access_token') !== undefined ? this.$store.dispatch('checkAuth') : null;
+  },
+  errorCaptured(err, vm, ...rest) {
+    // console.log(err.name)
+    // this.$store.commit('setErrMsg', { errMessage: err.name === 'AxiosError' ? (err as AxiosError).message : null })
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(to, from) {
+        document.title = to.meta.title || 'Product browser';
+      }
+    },
+  },
   components: {
     Layout
   }
 });
 </script>
+
+<style lang="scss">
+@import './styles/main.scss';
+</style>

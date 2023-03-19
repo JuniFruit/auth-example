@@ -4,35 +4,31 @@ import { IUser } from "@/types/user.types";
 import { AxiosResponse } from "axios";
 
 export class UserService {
-  static async login(
-    email: string,
-    password: string
-  ): Promise<AxiosResponse<IAuth>> {
+  static login(email: string, password: string): Promise<AxiosResponse<IAuth>> {
     return api.post<IAuth>("api/login", {
-      data: {
-        email,
-        password,
-      },
+      email,
+      password,
     });
   }
 
-  static async register(
+  static register(
     email: string,
     password: string
   ): Promise<AxiosResponse<IAuth>> {
-    return api.post<IAuth>("api/register", {
-      data: {
-        email,
-        password,
-      },
+    return api.post<IAuth>("api/registration", {
+      email,
+      password,
     });
   }
 
-  static async logout(): Promise<number> {
+  static logout(): Promise<any> {
     return api.post("api/logout");
   }
 
-  static async getAllUsers(): Promise<AxiosResponse<IUser[]>> {
+  static getAllUsers(): Promise<AxiosResponse<IUser[]>> {
     return api.get<IUser[]>("api/users");
+  }
+  static resendMail(): Promise<any> {
+    return api.post("api/resend_mail");
   }
 }

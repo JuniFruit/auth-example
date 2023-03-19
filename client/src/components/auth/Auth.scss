@@ -1,0 +1,13 @@
+@use "sass:map";
+@use "../../styles/helpers/mixins" as mixins;
+@use "~vuetify/src/styles/styles.sass" as vuetify;
+
+.main_container {
+  max-width: 35rem;
+  margin: 0 auto;
+
+  .button_container {
+    gap: 0.75rem;
+    min-width: map-get(vuetify.$headings, "h2", "size");
+  }
+}

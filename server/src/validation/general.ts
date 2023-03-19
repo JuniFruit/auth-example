@@ -8,7 +8,6 @@ const PASS_COMMON = ["Password", "P@assw0rd"];
 const EMAIL_MESSAGE = "Please enter a valid email";
 
 export const passwordValid = body("password")
-  .isLength({ min: 6 })
   .matches(PASS_REGEX)
   .withMessage(PASS_MESSAGE)
   .not()
